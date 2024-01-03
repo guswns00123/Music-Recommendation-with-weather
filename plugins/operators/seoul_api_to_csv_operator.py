@@ -38,6 +38,7 @@ class SeoulApiToCsvOperator(BaseOperator):
                    }
 
         request_url = f'{base_url}'
+        print(request_url)
         if self.base_dt is not None:
             request_url = f'{base_url}'
         response = requests.get(request_url)
