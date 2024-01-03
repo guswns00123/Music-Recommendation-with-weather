@@ -12,8 +12,8 @@ with DAG(
     tb_corona19_count_status = SeoulApiToCsvOperator(
         task_id='tb_corona19_count_status',
         dataset_nm='TbCorona19CountStatus',
-        path='/opt/airflow/files/TbCorona19CountStatus/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
-        file_name='TbCorona19CountStatus.csv'
+        path='/opt/airflow/files/Weather/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash }}',
+        file_name='weather.csv'
     )
     
     
