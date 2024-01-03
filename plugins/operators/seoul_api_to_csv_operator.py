@@ -38,12 +38,13 @@ class SeoulApiToCsvOperator(BaseOperator):
                    }
 
         request_url = f'{base_url}'
-        print(request_url)
+        self.log.info(request_url)
         if self.base_dt is not None:
             request_url = f'{base_url}'
         response = requests.get(request_url)
         contents = json.loads(response.text)
         print(contents)
+        self.log.info(contents)
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
         row_df = pd.DataFrame(row_data)
