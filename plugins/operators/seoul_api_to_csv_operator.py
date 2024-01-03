@@ -43,10 +43,9 @@ class SeoulApiToCsvOperator(BaseOperator):
             request_url = f'{base_url}'
         response = requests.get(request_url)
         contents = json.loads(response.text)
-        print(contents)
         self.log.info(contents)
-        key_nm = list(contents.keys())[0]
-        row_data = contents.get(key_nm).get('row')
-        row_df = pd.DataFrame(row_data)
+        items = contents['response']['body']['items']['item']
 
-        return row_df
+# Create a DataFrame
+        df = pd.DataFrame(items)
+        return df
