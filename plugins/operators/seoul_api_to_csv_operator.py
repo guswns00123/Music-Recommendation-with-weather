@@ -22,16 +22,7 @@ class SeoulApiToCsvOperator(BaseOperator):
         total_row_df = pd.DataFrame()
         start_row = 1
         end_row = 10
-        # while True:
-        #     self.log.info(f'시작:{start_row}')
-        #     self.log.info(f'끝:{end_row}')
-        #     row_df = self._call_api(self.base_url, start_row, end_row)
-        #     total_row_df = pd.concat([total_row_df, row_df])
-        #     if len(row_df) < 1000:
-        #         break
-        #     else:
-        #         start_row = end_row + 1
-        #         end_row += 1000
+
         total_row_df = self._call_api(self.base_url, start_row, end_row)
         if not os.path.exists(self.path):
             os.system(f'mkdir -p {self.path}')
@@ -51,7 +42,7 @@ class SeoulApiToCsvOperator(BaseOperator):
             request_url = f'{base_url}'
         response = requests.get(request_url)
         contents = json.loads(response.text)
-
+        print(contents)
         key_nm = list(contents.keys())[0]
         row_data = contents.get(key_nm).get('row')
         row_df = pd.DataFrame(row_data)
